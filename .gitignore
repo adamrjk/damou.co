@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Vercel
+.vercel
+
+# Local env
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
