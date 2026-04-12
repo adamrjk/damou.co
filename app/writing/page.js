@@ -9,11 +9,11 @@ import { getPosts } from '../../lib/posts'
 /*
   metadata can be exported from any page.js to set the tab title/description
   for that specific page. The template from layout.js applies:
-  "Writing — Adam Kabbaj"
+  "Writing — Adam Damou"
 */
 export const metadata = {
   title: 'Writing',
-  description: 'Posts on things I\'m building, reading, and thinking about.',
+  description: "Posts on things I'm building, reading, and thinking about.",
 }
 
 export default async function WritingPage() {

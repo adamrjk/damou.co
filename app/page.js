@@ -34,7 +34,7 @@ export default async function Home() {
       {/* --- Intro --- */}
       <section style={{ marginBottom: '4rem' }}>
         <h1 style={{ fontSize: '1.4rem', fontWeight: 600, marginBottom: '0.75rem', marginTop: 0 }}>
-          Adam Kabbaj
+          Adam Damou
         </h1>
         <p style={{ color: 'var(--muted)', maxWidth: '30rem', marginTop: 0 }}>
           Student at EPFL. Building things, writing about what I learn.

@@ -18,10 +18,10 @@ import Nav from '../components/Nav'
 */
 export const metadata = {
   title: {
-    default: 'Adam Kabbaj',
+    default: 'Adam Damou',
     // %s gets replaced by the page title. So a post called "Hello" becomes
-    // "Hello — Adam Kabbaj" in the browser tab.
-    template: '%s — Adam Kabbaj',
+    // "Hello — Adam Damou" in the browser tab.
+    template: '%s — Adam Damou',
   },
   description: 'Student, builder, writer.',
 }
