@@ -1,11 +1,11 @@
 ---
 title: "Hello, world"
-date: "2025-04-12"
-description: "First post. Why I'm starting to write."
+date: "2026-05-06"
+description: "Why I'm starting to write."
 tags: ["meta"]
 ---
 
-I've been meaning to start writing publicly for a while. Every time I found a reason not to — not ready, not interesting enough, need a better setup first.
+I've been meaning to start writing publicly for a while.
 
 The setup is now done (I built it this week, actually), so here we go.
 

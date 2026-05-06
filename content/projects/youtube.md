@@ -1,11 +1,11 @@
 ---
 name: "YouTube channel"
-tagline: "Building, learning, in public."
-year: "2023"
+tagline: "Sharing my learnings"
+year: "2024"
 tags: ["Video"]
 links:
   - label: "YouTube"
-    href: "https://youtube.com"
+    href: "https://youtube.com/@adamgoal"
 ---
 
-Videos on what I build, what I read, and whatever else I find interesting that week.
+Videos on what I build, what I read, and whatever else I find interesting

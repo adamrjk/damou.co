@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Adam",
-    "description": "Student, builder, writer."
+    "description": "Student, builder, entrepreneur."
   },
   "hero": {
     "eyebrow": "Lausanne · EPFL · 2026",
     "name": "Adam.",
     "tagline": {
-      "muted": "Student at EPFL.",
+      "muted": "CS Student at EPFL.",
       "main": "I build software, ship apps, and write about what I learn along the way."
     }
   },

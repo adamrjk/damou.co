@@ -1,17 +1,14 @@
 ---
 ---
 
-*This is a placeholder. Replace it with your story — written in markdown,
-rendered in italics, like a quiet voice telling you who I am.*
+My name is Adam, I'm 19 and I'm French.
 
-*I was born somewhere, raised somewhere else, and ended up here. Along
-the way I picked up a few skills, lost a few illusions, and figured out
-that the things worth doing are usually the things that scare me.*
+I was born in Paris and lived in France, Algeria, Angola, Qatar and Switzerland.
 
-*I build software because I like the feeling of typing something into
-existence. I write because half of what I think only becomes clear once
-it's on a page. I make videos because some ideas are easier to show than
-to explain.*
+I'm currently studying Computer Science at EPFL and heading to Imperial College London in September.
 
-*This site is a long letter to whoever's reading. Thanks for stopping
-by.*
+I like building things. Apps, tools, ideas. Mostly around self improvement and AI.
+
+This website is my personal space, a place to store everything I do and share what I learn along the way.
+
+If you have questions or just want to talk, feel free to reach out.
