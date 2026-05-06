@@ -1,73 +1,60 @@
 /*
-  layout.js is the ROOT LAYOUT — it wraps every single page on the site.
-  Think of it like a template. Whatever you put here (nav, footer, fonts)
-  appears everywhere without you having to repeat it.
-
-  In Next.js App Router, every folder can have its own layout.js too,
-  which lets you nest layouts (e.g., a different sidebar just for /writing).
-  But for a personal site, one root layout is plenty.
+  Root layout — wraps every page on the site.
+  Pages set their own widths now; the layout just provides the nav, footer,
+  and global font stack.
 */
 
 import './globals.css'
 import Nav from '../components/Nav'
+import { getSite } from '../lib/site'
 
 /*
-  metadata is a special Next.js export — it tells search engines and browsers
-  what your site is called and what it's about. Next.js reads this and injects
-  the right <title> and <meta> tags automatically.
+  generateMetadata is the async form of `metadata`. We use it here so we can
+  pull the site title/description from content/site.json instead of hardcoding.
 */
-export const metadata = {
-  title: {
-    default: 'Adam Damou',
-    // %s gets replaced by the page title. So a post called "Hello" becomes
-    // "Hello — Adam Damou" in the browser tab.
-    template: '%s — Adam Damou',
-  },
-  description: 'Student, builder, writer.',
+export async function generateMetadata() {
+  const site = getSite()
+  return {
+    metadataBase: new URL('https://damou.co'),
+    title: {
+      default: site.meta.title,
+      template: `%s — ${site.meta.title}`,
+    },
+    description: site.meta.description,
+  }
 }
 
-/*
-  RootLayout is a React component. In React, a "component" is just a function
-  that returns HTML-like syntax called JSX. Components start with a capital letter.
-
-  { children } is destructuring — we're pulling the `children` prop out of
-  the object passed to this function. `children` is whatever page is currently
-  being rendered inside the layout.
-*/
 export default function RootLayout({ children }) {
+  const site = getSite()
+
   return (
-    /*
-      JSX looks like HTML but it's actually JavaScript. A few key differences:
-      - className instead of class (because class is a reserved JS keyword)
-      - All tags must be closed, even <br /> and <img />
-      - You can embed JS expressions inside { curly braces }
-    */
     <html lang="en">
       <head>
-        {/* Google Fonts — JetBrains Mono for that clean monospace look */}
+        {/* JetBrains Mono for accent labels and code. SF Pro is loaded by the
+            system on Apple devices via the font stack — no external request. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
-        {/*
-          This div centers the content and caps its width.
-          max-w-2xl with mx-auto = centered column, no more than ~42rem wide.
-          px-6 = horizontal padding so content doesn't touch the screen edges on mobile.
-        */}
-        <div style={{ maxWidth: '42rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <Nav />
-          {/*
-            `main` is a semantic HTML tag — it tells browsers/screen readers
-            where the main content is. py-12 adds vertical padding.
-          */}
-          <main style={{ paddingTop: '3rem', paddingBottom: '5rem' }}>
-            {children}
-          </main>
-        </div>
+        <Nav />
+        {/* The nav is fixed (position: fixed) so push the page below it. */}
+        <main className="pt-14">{children}</main>
+
+        <footer className="mt-32 border-t border-[var(--color-border)]">
+          <div className="mx-auto max-w-6xl px-6 py-10 text-sm">
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-subtle)]">
+              {site.footer.copyright}
+            </span>
+          </div>
+        </footer>
       </body>
     </html>
   )

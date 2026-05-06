@@ -1,16 +1,11 @@
 /*
-  The writing index page — lists all posts.
-  URL: /writing
+  /writing — list of all posts, grouped by year.
 */
 
 import Link from 'next/link'
 import { getPosts } from '../../lib/posts'
+import Reveal from '../../components/Reveal'
 
-/*
-  metadata can be exported from any page.js to set the tab title/description
-  for that specific page. The template from layout.js applies:
-  "Writing — Adam Damou"
-*/
 export const metadata = {
   title: 'Writing',
   description: "Posts on things I'm building, reading, and thinking about.",
@@ -20,27 +15,29 @@ export default async function WritingPage() {
   const posts = await getPosts()
 
   return (
-    <div>
-      <h1 style={{ fontSize: '1.4rem', fontWeight: 600, marginTop: 0, marginBottom: '0.5rem' }}>
-        Writing
-      </h1>
-      <p style={{ color: 'var(--muted)', marginBottom: '3rem', marginTop: 0 }}>
-        {posts.length} {posts.length === 1 ? 'post' : 'posts'}
-      </p>
+    <div className="mx-auto max-w-3xl px-6 pt-24 sm:pt-32 pb-20">
+      {/* Page header */}
+      <Reveal>
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--color-muted)] mb-6">
+          {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+        </p>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <h1 className="text-5xl sm:text-6xl font-semibold tracking-[-0.025em] leading-[1] mb-16">
+          Writing.
+        </h1>
+      </Reveal>
 
       {posts.length === 0 ? (
-        <p style={{ color: 'var(--muted)' }}>Nothing published yet.</p>
+        <Reveal>
+          <p className="text-[var(--color-muted)]">Nothing published yet.</p>
+        </Reveal>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+        <div className="flex flex-col gap-14">
           {/*
-            We group posts by year so the list has structure.
-            This uses .reduce() — one of the more powerful array methods.
-
-            .reduce(callback, initialValue) iterates over the array and
-            "accumulates" a result. Here we're building an object where
-            each key is a year and the value is an array of that year's posts.
-
-            e.g. { "2025": [...posts], "2024": [...posts] }
+            Group posts by year, then sort years descending.
+            .reduce() builds an object like { "2025": [...], "2024": [...] }.
           */}
           {Object.entries(
             posts.reduce((groups, post) => {
@@ -50,44 +47,39 @@ export default async function WritingPage() {
               return groups
             }, {})
           )
-            /* Sort years descending (newest year first) */
             .sort(([a], [b]) => Number(b) - Number(a))
             .map(([year, yearPosts]) => (
-              <div key={year}>
-                {/* Year heading */}
-                <div style={{
-                  fontSize: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  color: 'var(--muted)',
-                  marginBottom: '1rem',
-                }}>
-                  {year}
-                </div>
+              <Reveal key={year}>
+                <section>
+                  <div className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-subtle)] mb-4">
+                    {year}
+                  </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {yearPosts.map((post) => (
-                    <div key={post.slug} style={{ display: 'grid', gridTemplateColumns: '6rem 1fr', gap: '1rem', alignItems: 'start' }}>
-                      {/* Date */}
-                      <span style={{ color: 'var(--muted)', fontSize: '0.8rem', paddingTop: '0.1rem' }}>
-                        {formatShortDate(post.date)}
-                      </span>
-
-                      {/* Title + description */}
-                      <div>
-                        <Link href={`/writing/${post.slug}`} style={{ textDecoration: 'none', fontWeight: 500 }}>
-                          {post.title}
-                        </Link>
-                        {post.description && (
-                          <p style={{ color: 'var(--muted)', margin: '0.2rem 0 0', fontSize: '0.85rem' }}>
-                            {post.description}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                  <div className="border-t border-[var(--color-border)]">
+                    {yearPosts.map((post) => (
+                      <Link
+                        key={post.slug}
+                        href={`/writing/${post.slug}`}
+                        className="group grid grid-cols-[5rem_1fr] gap-6 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-purple-soft)]/40 transition-colors -mx-4 px-4 rounded-md"
+                      >
+                        <span className="font-mono text-xs uppercase tracking-[0.15em] text-[var(--color-subtle)] pt-1">
+                          {formatShortDate(post.date)}
+                        </span>
+                        <div>
+                          <h2 className="text-lg font-medium tracking-tight group-hover:text-[var(--color-purple)] transition-colors">
+                            {post.title}
+                          </h2>
+                          {post.description && (
+                            <p className="mt-1 text-sm text-[var(--color-muted)]">
+                              {post.description}
+                            </p>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              </Reveal>
             ))}
         </div>
       )}

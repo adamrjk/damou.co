@@ -1,85 +1,67 @@
 /*
-  This is a React component file. It exports one thing: the Nav component.
-  Components are the core building block of React — each one is responsible
-  for a single piece of the UI.
+  Sticky top navigation. Transparent at the top of the page, switches to a
+  frosted-glass white once you start scrolling — same trick apple.com uses.
 
-  `'use client'` tells Next.js this component runs in the browser (not on the server).
-  We need it here because usePathname() reads the current URL, which only
-  makes sense client-side.
+  Client component (uses scroll state and the current pathname).
 */
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
-/*
-  NAV_LINKS is defined outside the component because it never changes.
-  Putting constants outside means they're only created once, not re-created
-  every time the component renders.
-*/
 const NAV_LINKS = [
-  { href: '/', label: 'home' },
-  { href: '/writing', label: 'writing' },
-  { href: '/projects', label: 'projects' },
-  { href: '/now', label: 'now' },
+  { href: '/content', label: 'Content' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Nav() {
-  /*
-    usePathname() is a React "hook" — hooks let components tap into
-    browser/Next.js features. This one returns the current URL path,
-    e.g. "/writing" or "/now". We use it to highlight the active link.
-
-    Hooks always start with `use`. You can only call them at the top level
-    of a component, never inside loops or if-statements.
-  */
   const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <nav style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingTop: '2rem',
-      paddingBottom: '2rem',
-      borderBottom: '1px solid var(--border)',
-      marginBottom: '1rem',
-    }}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/75 backdrop-blur-xl border-b border-[var(--color-border)]'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
+        <Link
+          href="/"
+          className="text-[15px] font-semibold tracking-tight hover:opacity-70"
+        >
+          Adam
+        </Link>
 
-      {/* Site name / logo — links back to home */}
-      <Link href="/" style={{ textDecoration: 'none', fontWeight: 600 }}>
-        ak
-      </Link>
-
-      {/*
-        We .map() over the NAV_LINKS array to turn it into a list of <Link> elements.
-        .map() is JavaScript's way of transforming an array — for each item,
-        run a function and collect the results into a new array.
-
-        The `key` prop is required by React when rendering lists. It helps React
-        figure out which items changed when the list updates. Use something unique
-        (like the href here).
-      */}
-      <div style={{ display: 'flex', gap: '1.5rem' }}>
-        {NAV_LINKS.map((link) => {
-          const isActive = pathname === link.href ||
-            (link.href !== '/' && pathname.startsWith(link.href))
-
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              style={{
-                textDecoration: 'none',
-                color: isActive ? 'var(--fg)' : 'var(--muted)',
-                fontWeight: isActive ? 500 : 400,
-                transition: 'color 0.15s',
-              }}
-            >
-              {link.label}
-            </Link>
-          )
-        })}
+        <div className="flex items-center gap-1">
+          {NAV_LINKS.map(({ href, label }) => {
+            const active =
+              pathname === href || pathname.startsWith(href + '/')
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
+                  active
+                    ? 'text-[var(--color-fg)] font-medium'
+                    : 'text-[var(--color-muted)] hover:text-[var(--color-fg)]'
+                }`}
+              >
+                {label}
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </nav>
   )

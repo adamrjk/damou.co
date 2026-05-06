@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "Adam",
+    "description": "Student, builder, writer."
+  },
+  "hero": {
+    "eyebrow": "Lausanne · EPFL · 2026",
+    "name": "Adam.",
+    "tagline": {
+      "muted": "Student at EPFL.",
+      "main": "I build software, ship apps, and write about what I learn along the way."
+    }
+  },
+  "elsewhere": [
+    { "label": "YouTube", "handle": "@adamgoal", "href": "https://youtube.com/@adamgoal" },
+    { "label": "GitHub", "handle": "@adamrjk", "href": "https://github.com/adamrjk" },
+    { "label": "X", "handle": "@Iamdamou", "href": "https://x.com/Iamdamou" }
+  ],
+  "footer": {
+    "copyright": "© Adam — 2026"
+  }
+}
