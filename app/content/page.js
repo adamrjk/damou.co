@@ -56,7 +56,7 @@ export default async function ContentPage() {
 
 function ContentRow({ item }) {
   const className =
-    'group flex items-start gap-5 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-purple-soft)]/40 transition-colors -mx-4 px-4 rounded-md'
+    'group flex items-start gap-5 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-row-hover)] transition-colors -mx-4 px-4 rounded-md'
 
   const inner = (
     <>

@@ -48,8 +48,11 @@ export default async function ProjectsPage() {
 }
 
 function FeaturedCard({ project }) {
-  return (
-    <div className="relative overflow-hidden rounded-3xl bg-[var(--color-cream)] border border-[var(--color-border)] p-10 sm:p-16">
+  const cardClass =
+    'cream-card group relative overflow-hidden rounded-3xl bg-[var(--color-cream)] border border-[var(--color-border)] p-10 sm:p-16 block hover:border-[var(--color-purple)] transition-colors'
+
+  const inner = (
+    <>
       <div className="flex items-center justify-between mb-8">
         <div className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-purple)]">
           Featured · {project.tags.join(' · ')}
@@ -72,27 +75,41 @@ function FeaturedCard({ project }) {
         dangerouslySetInnerHTML={{ __html: project.descriptionHtml }}
       />
 
-      <div className="flex flex-wrap gap-3 mt-10">
-        {project.links.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-fg)] text-white text-sm hover:bg-[var(--color-purple)] transition-colors"
-          >
-            {link.label}
-            <span>→</span>
-          </a>
-        ))}
-      </div>
-    </div>
+      {project.href && (
+        <span className="inline-flex items-center gap-2 mt-10 text-sm text-[var(--color-fg)]">
+          {prettyHost(project.href)}
+          <span className="transition-transform group-hover:translate-x-1">↗</span>
+        </span>
+      )}
+    </>
   )
+
+  if (project.href) {
+    return (
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cardClass}
+      >
+        {inner}
+      </a>
+    )
+  }
+  return <div className={cardClass}>{inner}</div>
+}
+
+function prettyHost(url) {
+  try {
+    return new URL(url).host.replace(/^www\./, '')
+  } catch {
+    return url
+  }
 }
 
 function ProjectCard({ project }) {
   return (
-    <div className="group h-full p-8 rounded-2xl border border-[var(--color-border)] bg-white hover:border-[var(--color-purple)] transition-colors flex flex-col">
+    <div className="group h-full p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-purple)] transition-colors flex flex-col">
       <div className="flex items-baseline justify-between mb-3">
         <h3 className="text-xl font-semibold tracking-tight">{project.name}</h3>
         <span className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-subtle)]">

@@ -60,7 +60,7 @@ export default async function WritingPage() {
                       <Link
                         key={post.slug}
                         href={`/writing/${post.slug}`}
-                        className="group grid grid-cols-[5rem_1fr] gap-6 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-purple-soft)]/40 transition-colors -mx-4 px-4 rounded-md"
+                        className="group grid grid-cols-[5rem_1fr] gap-6 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-row-hover)] transition-colors -mx-4 px-4 rounded-md"
                       >
                         <span className="font-mono text-xs uppercase tracking-[0.15em] text-[var(--color-subtle)] pt-1">
                           {formatShortDate(post.date)}

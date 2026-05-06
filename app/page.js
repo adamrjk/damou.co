@@ -93,7 +93,7 @@ export default async function Home() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-6 rounded-2xl border border-[var(--color-border)] hover:border-[var(--color-purple)] hover:bg-white transition-all"
+                className="group block p-6 rounded-2xl border border-[var(--color-border)] hover:border-[var(--color-purple)] hover:bg-[var(--color-surface)] transition-all"
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
@@ -117,7 +117,7 @@ export default async function Home() {
 
 function FeaturedSection({ project }) {
   const className =
-    'group block relative overflow-hidden rounded-3xl bg-[var(--color-cream)] border border-[var(--color-border)] p-10 sm:p-16 hover:border-[var(--color-purple)] transition-colors'
+    'cream-card group block relative overflow-hidden rounded-3xl bg-[var(--color-cream)] border border-[var(--color-border)] p-10 sm:p-16 hover:border-[var(--color-purple)] transition-colors'
 
   const inner = (
     <>
@@ -166,7 +166,7 @@ function FeaturedSection({ project }) {
 
 function RecentRow({ item }) {
   const className =
-    'group flex items-start gap-5 py-6 border-b border-[var(--color-border)] hover:bg-[var(--color-purple-soft)]/40 transition-colors -mx-4 px-4 rounded-md'
+    'group flex items-start gap-5 py-6 border-b border-[var(--color-border)] hover:bg-[var(--color-row-hover)] transition-colors -mx-4 px-4 rounded-md'
 
   const inner = (
     <>
