@@ -1,6 +1,6 @@
 ---
-title: "Hello, world"
-date: "2026-05-06"
+title: "What the hell is this?"
+date: "2026-05-04"
 description: "Why I'm starting to write."
 tags: ["meta"]
 ---
