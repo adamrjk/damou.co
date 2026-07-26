@@ -12,9 +12,9 @@
     }
   },
   "elsewhere": [
-    { "label": "YouTube", "handle": "@adamgoal", "href": "https://youtube.com/@adamgoal" },
-    { "label": "GitHub", "handle": "@adamrjk", "href": "https://github.com/adamrjk" },
-    { "label": "X", "handle": "@Iamdamou", "href": "https://x.com/Iamdamou" }
+    { "label": "YouTube", "handle": "@ad4mou", "href": "https://youtube.com/@ad4mou" },
+    { "label": "GitHub", "handle": "@ad4mou", "href": "https://github.com/ad4mou" },
+    { "label": "X", "handle": "@ad4mou", "href": "https://x.com/ad4mou" }
   ],
   "footer": {
     "copyright": "© Adam — 2026"
